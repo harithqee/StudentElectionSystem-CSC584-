@@ -3,34 +3,17 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/src/java/com/election/controller/UserDAO.java</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/web/student_dashboard.jsp</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/web/edit.html</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/web/lecturer_dashboard.jsp</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/src/java/com/election/controller/VoteServlet.java</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/web/lecturer_dashboard.html</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/web/vote_success.jsp</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/src/java/com/election/controller/EditCandidateServlet.java</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/src/java/com/election/controller/LogoutServlet.java</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/web/editCandidate.jsp</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/src/java/com/election/controller/EditStudentServlet.java</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/web/admin_dashboard.jsp</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/web/admin_dashboard.html</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/web/edit_student.jsp</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/web/css/style.css</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/src/java/com/election/model/UserBean.java</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/src/java/com/election/controller/DeleteStudentServlet.java</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/src/java/com/election/model/CandidateBean.java</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/web/addCandidate.jsp</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/src/java/com/election/controller/StudentSubmitProfileServlet.java</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/web/register.jsp</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/src/java/com/election/controller/RegisterServlet.java</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/web/candidate_acceptance.jsp</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/src/java/com/election/controller/AddStudentServlet.java</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/src/java/com/election/controller/AppointCandidateServlet.java</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/src/java/com/election/controller/VoteDAO.java</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/web/index.jsp</file>
-            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/CSC584GroupProject/src/java/com/election/controller/LoginServlet.java</file>
+            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/src/java/com/election/controller/VoteServlet.java</file>
+            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/web/index.jsp</file>
+            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/src/java/com/election/controller/AppointServlet.java</file>
+            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/src/java/com/election/model/CandidateBean.java</file>
+            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/web/admin_dashboard.jsp</file>
+            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/web/admin_dashboard.html</file>
+            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/web/lecturer_dashboard.jsp</file>
+            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/web/edit_student.jsp</file>
+            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/web/css/style.css</file>
+            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/src/java/com/election/controller/UserDAO.java</file>
+            <file>file:/C:/Users/harit/Documents/NetBeansProjects/CSC584GroupProject/src/java/com/election/controller/VoteDAO.java</file>
         </group>
     </open-files>
 </project-private>

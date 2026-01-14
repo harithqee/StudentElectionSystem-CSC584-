@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Voting Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+        }
+
+        header p {
+            color: white;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        header p strong {
+            font-weight: 600;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .candidates-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+
+        .candidate-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 3px solid transparent;
+        }
+
+        .candidate-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .candidate-card.selected {
+            border-color: #667eea;
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+        }
+
+        .candidate-image {
+            width: 100%;
+            height: 280px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+        }
+
+        .candidate-image img {
+            width: 50%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+        }
+
+        .candidate-info {
+            padding: 30px;
+        }
+
+        .candidate-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .radio-wrapper {
+            flex-shrink: 0;
+        }
+
+        .radio-wrapper input[type="radio"] {
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            accent-color: #667eea;
+        }
+
+        .candidate-name {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #333;
+            flex: 1;
+        }
+
+        .slogan-section {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            border: 2px solid #667eea;
+        }
+
+        .slogan-text {
+            font-size: 1.2rem;
+            color: #667eea;
+            font-weight: 600;
+            font-style: italic;
+            line-height: 1.5;
+        }
+
+        .submit-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            max-width: 400px;
+            padding: 18px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            margin-bottom: 20px;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        .warning {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 15px 20px;
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 10px;
+            color: #856404;
+            font-size: 0.95rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .warning::before {
+            content: '⚠️';
+            font-size: 1.5rem;
+        }
+
+        nav {
+            text-align: center;
+            margin-top: 30px;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 12px 30px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            background: #f8f9fa;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            .candidates-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .candidate-image {
+                height: 220px;
+                font-size: 4.5rem;
+            }
+
+            .candidate-info {
+                padding: 20px;
+            }
+
+            .candidate-name {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>✅ Cast Your Vote</h1>
+        <p>Welcome, <strong>[Student Name/ID]</strong>. Please select <strong>one</strong> candidate below.</p>
+    </header>
+    
+    <main>
+        <div class="candidates-grid">
+            <div class="candidate-card" onclick="selectCard(this, 'candidate_1')">
+                <div class="candidate-image">
+                    <img src="picture/formalpic_1.jpg" alt="Candidate 1">
+                </div>
+                <div class="candidate-info">
+                    <div class="candidate-header">
+                        <div class="radio-wrapper">
+                            <input type="radio" id="candidate_1" name="vote" value="Candidate A" required>
+                        </div>
+                        <label for="candidate_1" class="candidate-name">Candidate A - John Smith</label>
+                    </div>
+                    <div class="slogan-section">
+                        <div class="slogan-text">
+                            "Excellence Through Innovation"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="candidate-card" onclick="selectCard(this, 'candidate_2')">
+                <div class="candidate-image">
+                    <img src="picture/formalpic_3.jpg" alt="Candidate 2">
+                </div>
+                <div class="candidate-info">
+                    <div class="candidate-header">
+                        <div class="radio-wrapper">
+                            <input type="radio" id="candidate_2" name="vote" value="Candidate B">
+                        </div>
+                        <label for="candidate_2" class="candidate-name">Candidate B - Emily Chen</label>
+                    </div>
+                    <div class="slogan-section">
+                        <div class="slogan-text">
+                            "Sustainability, Inclusion, Support"
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="candidate-card" onclick="selectCard(this, 'candidate_3')">
+                <div class="candidate-image">
+                    <img src="picture/photo.jpg" alt="Candidate 3">
+                </div>
+                <div class="candidate-info">
+                    <div class="candidate-header">
+                        <div class="radio-wrapper">
+                            <input type="radio" id="candidate_3" name="vote" value="Candidate C">
+                        </div>
+                        <label for="candidate_3" class="candidate-name">Candidate C - Marcus Lee</label>
+                    </div>
+                    <div class="slogan-section">
+                        <div class="slogan-text">
+                            "Together We Rise"
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="submit-section">
+            <button type="submit" onclick="handleVote(event)">Submit Vote</button>
+            <div class="warning">
+                <strong>Note:</strong> Once submitted, your vote cannot be changed.
+            </div>
+        </div>
+    </main>
+    
+    <nav>
+        <a href="login.html">Logout</a>
+    </nav>
+
+    <script>
+        function selectCard(card, radioId) {
+            document.querySelectorAll('.candidate-card').forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            document.getElementById(radioId).checked = true;
+        }
+
+        function handleVote(e) {
+            e.preventDefault();
+            const selectedCandidate = document.querySelector('input[name="vote"]:checked');
+            
+            if (selectedCandidate) {
+                if (confirm(`Are you sure you want to vote for ${selectedCandidate.value}?\n\nThis action cannot be undone.`)) {
+                    alert(`Thank you for voting!\n\nYour vote for ${selectedCandidate.value} has been recorded.`);
+                }
+            } else {
+                alert('Please select a candidate before submitting.');
+            }
+        }
+    </script>
+</body>
+</html>

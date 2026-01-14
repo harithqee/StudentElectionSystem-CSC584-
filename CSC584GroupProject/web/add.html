@@ -1,0 +1,304 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Candidate</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeInDown 0.8s ease-out;
+        }
+
+        header h1 {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 15px;
+        }
+
+        header p {
+            color: white;
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 800px;
+            margin: 0 auto;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            color: #555;
+            font-weight: 500;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+        }
+
+        input[type="text"], textarea, input[type="file"] {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #fafafa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        input[type="file"] {
+            padding: 12px;
+            cursor: pointer;
+        }
+
+        input[type="file"]::file-selector-button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-right: 15px;
+            transition: all 0.3s ease;
+        }
+
+        input[type="file"]::file-selector-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+        }
+
+        input[type="text"]:focus, textarea:focus, input[type="file"]:focus {
+            outline: none;
+            border-color: #667eea;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        button[type="submit"] {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            margin-top: 10px;
+        }
+
+        button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+        }
+
+        button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
+        nav {
+            text-align: center;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-out 0.5s both;
+        }
+
+        nav a {
+            display: inline-block;
+            padding: 12px 30px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            margin: 0 10px;
+        }
+
+        nav a:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+            background: #f8f9fa;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header h1 {
+                font-size: 2rem;
+            }
+
+            header p {
+                font-size: 1rem;
+            }
+
+            section {
+                padding: 25px 20px;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Add New Candidate</h1>
+        <p>Fill in the details below to add a new candidate to the election</p>
+    </header>
+    //test
+    <main>
+        <section>
+            <h2>Candidate Information</h2>
+            
+            <div class="input-group">
+                <label for="candidate_name">Candidate Full Name:</label>
+                <input type="text" id="candidate_name" name="candidate_name" placeholder="Enter full name" required>
+            </div>
+            
+            <div class="input-group">
+                <label for="candidate_id">Candidate ID/Alias:</label>
+                <input type="text" id="candidate_id" name="candidate_id" placeholder="Enter ID or alias">
+            </div>
+
+            <div class="input-group">
+                <label for="candidate_picture">Candidate Picture:</label>
+                <input type="file" id="candidate_picture" name="candidate_picture" accept="image/*">
+            </div>
+
+            <div class="input-group">
+                <label for="candidate_slogan">Campaign Slogan:</label>
+                <input type="text" id="candidate_slogan" name="candidate_slogan" placeholder="Enter campaign slogan">
+            </div>
+
+            <div class="input-group">
+                <label for="candidate_manifesto">Manifesto:</label>
+                <textarea id="candidate_manifesto" name="candidate_manifesto" placeholder="Enter candidate's manifesto and key points"></textarea>
+            </div>
+            
+            <button type="submit" onclick="handleAddCandidate(event)">Add Candidate</button>
+        </section>
+    </main>
+    
+    <nav>
+        <a href="admin_dashboard.html">← Back to Dashboard</a>
+        <a href="login.html">Logout</a>
+    </nav>
+
+    <script>
+        function handleAddCandidate(e) {
+            e.preventDefault();
+            const name = document.getElementById('candidate_name').value;
+            const id = document.getElementById('candidate_id').value;
+            const manifesto = document.getElementById('candidate_manifesto').value;
+            const slogan = document.getElementById('candidate_slogan').value;
+            const picture = document.getElementById('candidate_picture').files[0];
+            
+            if (name && manifesto) {
+                const pictureInfo = picture ? `\nPicture: ${picture.name}` : '\nPicture: Not uploaded';
+                alert(`Candidate Added Successfully!\n\nName: ${name}\nID: ${id || 'Not specified'}${pictureInfo}\nSlogan: ${slogan || 'Not specified'}\nManifesto: ${manifesto.substring(0, 50)}...`);
+                
+                // Clear form
+                document.getElementById('candidate_name').value = '';
+                document.getElementById('candidate_id').value = '';
+                document.getElementById('candidate_manifesto').value = '';
+                document.getElementById('candidate_slogan').value = '';
+                document.getElementById('candidate_picture').value = '';
+                
+                // Redirect back to dashboard
+                setTimeout(() => {
+                    window.location.href = 'admin_dashboard.html';
+                }, 1500);
+            } else {
+                alert('Please enter candidate name and manifesto.');
+            }
+        }
+    </script>
+</body>
+</html>
