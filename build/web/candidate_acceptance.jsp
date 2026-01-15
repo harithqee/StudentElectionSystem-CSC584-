@@ -1,6 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@page import="com.election.model.UserBean"%>
-//test update
 <%
     UserBean currentUser = (UserBean) session.getAttribute("currentUser");
     if(currentUser == null) { response.sendRedirect("login.jsp"); return; }
