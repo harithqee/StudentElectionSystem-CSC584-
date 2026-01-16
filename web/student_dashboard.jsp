@@ -16,7 +16,7 @@
 
     // 2. Fetch Voting Data
     VoteDAO voteDao = new VoteDAO();
-    List<CandidateBean> candidateList = voteDao.getAllCandidates();
+    List<CandidateBean> candidateList = voteDao.getApprovedCandidates();
 
     // 3. CHECK CANDIDACY STATUS
     UserDAO userDao = new UserDAO();

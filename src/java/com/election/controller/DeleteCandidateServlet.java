@@ -9,17 +9,40 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "DeleteCandidateServlet", urlPatterns = {"/DeleteCandidateServlet"})
 public class DeleteCandidateServlet extends HttpServlet {
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String idStr = request.getParameter("id");
-        if(idStr != null) {
-            VoteDAO dao = new VoteDAO();
-            boolean success = dao.deleteCandidate(Integer.parseInt(idStr));
-            if(success) {
-                request.getSession().setAttribute("msg", "Candidate deleted successfully.");
+    
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        try {
+            String idStr = request.getParameter("id");
+            
+            if(idStr != null && !idStr.isEmpty()) {
+                int id = Integer.parseInt(idStr);
+                VoteDAO dao = new VoteDAO();
+                
+                // Perform Delete Logic
+                boolean success = dao.deleteCandidate(id);
+                
+                if(success) {
+                    // Success: Set message and Forward
+                    request.setAttribute("successMessage", "Candidate deleted successfully and student candidacy status reset to None.");
+                    request.getRequestDispatcher("admin_dashboard.jsp").forward(request, response);
+                } else {
+                    // Failure: Set error and Forward
+                    request.setAttribute("errorMessage", "Failed to delete candidate.");
+                    request.getRequestDispatcher("admin_dashboard.jsp").forward(request, response);
+                }
             } else {
-                request.getSession().setAttribute("error", "Failed to delete candidate.");
+                // Handle case where ID is missing
+                request.setAttribute("errorMessage", "Error: Candidate ID is missing.");
+                request.getRequestDispatcher("admin_dashboard.jsp").forward(request, response);
             }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("errorMessage", "System Error: " + e.getMessage());
+            request.getRequestDispatcher("admin_dashboard.jsp").forward(request, response);
         }
-        response.sendRedirect("admin_dashboard.jsp");
     }
 }

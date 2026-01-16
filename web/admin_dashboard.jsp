@@ -142,25 +142,45 @@
 
         <h2 class="section-title">Pending Approvals</h2>
         <div class="table-container">
-            <% if (pendingList.isEmpty()) { %>
-                <div style="padding: 30px; text-align: center; color: var(--text-muted);">No pending forms to review.</div>
-            <% } else { %>
-                <table>
-                    <thead><tr><th>Photo</th><th>Name</th><th>Faculty</th><th>Manifesto</th><th>Action</th></tr></thead>
-                    <tbody>
-                        <% for(CandidateBean c : pendingList) { %>
-                        <tr>
-                            <td><img src="<%= c.getImagePath() %>" class="thumb-img" onerror="this.onerror=null; this.src='picture/default.jpg';"></td>
-                            <td style="color: white; font-weight: 500;"><%= c.getName() %></td>
-                            <td><%= c.getFaculty() %></td>
-                            <td style="color: var(--text-muted); font-style: italic;">"<%= c.getManifesto() %>"</td>
-                            <td><a href="ApproveCandidateServlet?id=<%= c.getCandidateId() %>" class="btn-action btn-approve">Approve</a></td>
-                        </tr>
-                        <% } %>
-                    </tbody>
-                </table>
-            <% } %>
-        </div>
+    <% if (pendingList.isEmpty()) { %>
+        <div style="padding: 30px; text-align: center; color: var(--text-muted);">No pending forms to review.</div>
+    <% } else { %>
+        <table>
+            <thead>
+                <tr>
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>Faculty</th>
+                    <th>Manifesto</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for(CandidateBean c : pendingList) { %>
+                <tr>
+                    <td>
+                        <img src="<%= (c.getImagePath() != null && !c.getImagePath().isEmpty()) ? c.getImagePath() : "picture/default.jpg" %>" 
+                             class="thumb-img" 
+                             onerror="this.onerror=null; this.src='picture/default.jpg';">
+                    </td>
+                    <td style="color: white; font-weight: 500;"><%= c.getName() %></td>
+                    <td><%= c.getFaculty() %></td>
+                    <td style="color: var(--text-muted); font-style: italic;">"<%= c.getManifesto() %>"</td>
+                    <td>
+                        <a href="ApproveCandidateServlet?id=<%= c.getCandidateId() %>" class="btn-action btn-approve" style="margin-right: 5px;">Approve</a>
+                        
+                        <a href="DeleteCandidateServlet?id=<%= c.getCandidateId() %>" 
+                           class="btn-action btn-delete" 
+                           onclick="return confirm('Are you sure you want to REJECT this application? This will remove the candidate data and reset the student status.')">
+                           Reject
+                        </a>
+                    </td>
+                </tr>
+                <% } %>
+            </tbody>
+        </table>
+    <% } %>
+</div>
 
         <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 60px; margin-bottom: 20px;">
             <h2 class="section-title" style="margin: 0; border: none; padding: 0;">Manage Students</h2>

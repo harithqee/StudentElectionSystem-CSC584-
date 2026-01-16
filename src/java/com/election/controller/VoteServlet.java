@@ -23,7 +23,7 @@ public class VoteServlet extends HttpServlet {
         UserBean currentUser = (UserBean) session.getAttribute("currentUser");
 
         if (currentUser == null || !currentUser.getRole().equals("student")) {
-            response.sendRedirect("login.jsp");
+            response.sendRedirect("index.jsp");
             return;
         }
 

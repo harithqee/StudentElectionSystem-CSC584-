@@ -257,24 +257,68 @@ public class VoteDAO {
     // ==========================================
     // 9. CRUD: DELETE CANDIDATE
     // ==========================================
-    public boolean deleteCandidate(int id) {
-        try (Connection con = getConnection()) {
-            // Step 1: Delete votes associated with this candidate first (Foreign Key Constraint)
-            String sqlVotes = "DELETE FROM APP.VOTE WHERE CANDIDATEID = ?";
-            PreparedStatement ps1 = con.prepareStatement(sqlVotes);
-            ps1.setInt(1, id);
-            ps1.executeUpdate();
+    // Inside com.election.controller.VoteDAO
 
-            // Step 2: Delete the candidate
-            String sql = "DELETE FROM APP.CANDIDATE WHERE CANDIDATEID = ?";
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setInt(1, id);
-            return ps.executeUpdate() > 0;
-        } catch (Exception e) { 
-            e.printStackTrace(); 
-            return false; 
+public boolean deleteCandidate(int candidateId) {
+    // Queries
+    String selectStudentSql = "SELECT STUDENTID FROM CANDIDATE WHERE CANDIDATEID = ?";
+    String deleteCandidateSql = "DELETE FROM CANDIDATE WHERE CANDIDATEID = ?";
+    String resetStatusSql = "UPDATE STUDENT SET CANDIDACY_STATUS = 'NONE' WHERE STUDENTID = ?";
+
+    Connection con = null;
+    PreparedStatement psSelect = null;
+    PreparedStatement psDelete = null;
+    PreparedStatement psUpdate = null;
+    ResultSet rs = null;
+
+    try {
+        con = getConnection();
+        // Disable auto-commit to handle this as a transaction (optional but safer)
+        con.setAutoCommit(false); 
+
+        // STEP 1: Get the Student ID before deleting the candidate
+        String studentId = null;
+        psSelect = con.prepareStatement(selectStudentSql);
+        psSelect.setInt(1, candidateId);
+        rs = psSelect.executeQuery();
+
+        if (rs.next()) {
+            studentId = rs.getString("STUDENTID");
         }
+
+        // STEP 2: Delete the Candidate
+        psDelete = con.prepareStatement(deleteCandidateSql);
+        psDelete.setInt(1, candidateId);
+        int rowsAffected = psDelete.executeUpdate();
+
+        if (rowsAffected > 0 && studentId != null) {
+            // STEP 3: Reset the Student's Status in USERS table
+            psUpdate = con.prepareStatement(resetStatusSql);
+            psUpdate.setString(1, studentId);
+            psUpdate.executeUpdate();
+            
+            // Commit transaction
+            con.commit();
+            return true;
+        } else {
+            // If delete failed, rollback
+            con.rollback();
+            return false;
+        }
+
+    } catch (Exception e) {
+        e.printStackTrace();
+        try { if (con != null) con.rollback(); } catch (SQLException ex) { ex.printStackTrace(); }
+        return false;
+    } finally {
+        // Close all resources
+        try { if (rs != null) rs.close(); } catch (Exception e) {}
+        try { if (psSelect != null) psSelect.close(); } catch (Exception e) {}
+        try { if (psDelete != null) psDelete.close(); } catch (Exception e) {}
+        try { if (psUpdate != null) psUpdate.close(); } catch (Exception e) {}
+        try { if (con != null) con.close(); } catch (Exception e) {}
     }
+}
     // ==========================================
 // 10. GET ALL CANDIDATES (Legacy/Voting Page Support)
 // ==========================================
@@ -329,5 +373,30 @@ public List<String[]> getRecentVotes() {
     }
     return logs;
 }
+// Inside com.election.controller.VoteDAO
+
+public String getVotedCandidateName(String studentId) {
+    String candidateName = "Unknown";
+    // This query finds the candidate name associated with the student's vote
+    String sql = "SELECT c.NAME FROM CANDIDATE c " +
+                 "JOIN VOTE v ON c.CANDIDATEID = v.CANDIDATEID " +
+                 "WHERE v.STUDENTID = ?";
+                 
+    try (java.sql.Connection con = getConnection();
+         java.sql.PreparedStatement ps = con.prepareStatement(sql)) {
+        
+        ps.setString(1, studentId);
+        
+        try (java.sql.ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                candidateName = rs.getString("NAME");
+            }
+        }
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+    return candidateName;
+}
+
     }
 
